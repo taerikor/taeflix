@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './User.css'
 
 export class User extends React.Component {
     render(){
     return (
-        <div id={this.props.id}>
+        <div className='user' id={this.props.id}>
             <Link to={{
                 pathname:'/browse',
                 state:{
@@ -16,7 +17,7 @@ export class User extends React.Component {
             <span>{this.props.name}</span>
             </div>
             </Link> 
-            <button onClick={this.props.onBtnClick}>삭제</button>
+            <button onClick={this.props.onBtnClick}>ｘ</button>
         </div>
     )
     }

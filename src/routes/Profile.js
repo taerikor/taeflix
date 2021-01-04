@@ -76,9 +76,10 @@ class Profile extends React.Component {
                 e.target.classList.add(CLASS_HIDDEN)
             }
         return(
-            <>
+            <section className='profile_container'>
             <div className='inputbox' ref={this.state.inputBox}>
-            <span>프로필을 작성하세요.</span>
+            <span className='title'>프로필 추가</span>
+            <span className='desc'>다른 사용자를 등록하시려면 프로필을 추가하세요.</span>
             <form onSubmit={onSubmit}>
                 <input type='text' placeholder='이름'
                 value={this.state.name}
@@ -87,15 +88,18 @@ class Profile extends React.Component {
             </form>
             </div>
             <div className='profilebox' ref={this.state.UserBox}>
-                <button onClick={onBtnBack}>Back</button>
+                <span className='title'>프로필 관리</span>
+                    <button onClick={onBtnBack}>Back</button>
+                <div className='userbox'>
             {this.state.items.map(item => (
-          <User 
-          key={item.id}
-          id={item.id} 
-          onBtnClick={onBtnDelete} 
-          name={item.name}></User>))}
+                <User 
+                key={item.id}
+                id={item.id} 
+                onBtnClick={onBtnDelete} 
+                name={item.name}></User>))}
+                </div>
             </div>
-    </>
+    </section>
         )
     }
 }

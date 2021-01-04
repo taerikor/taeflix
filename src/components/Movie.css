@@ -1,0 +1,32 @@
+#hidden {
+  display: none;
+}
+.movieBox {
+  margin: 30px;
+  display: flex;
+}
+.movieBox img {
+  height: 200px;
+  width: 120px;
+  border-radius: 5px;
+}
+.movie_info {
+  height: 200px;
+  width: 300px;
+  background-color: #333;
+  border-radius: 5px;
+}
+.movie_info span {
+  color: lightgray;
+  font-size: 15px;
+}
+.movie_info .title {
+  color: white;
+  font-size: 20px;
+  padding: 10px;
+}
+.movie_info .year {
+  color: white;
+  font-size: 12px;
+  margin-left: 10px;
+}

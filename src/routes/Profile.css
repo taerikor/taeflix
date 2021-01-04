@@ -1,3 +1,79 @@
+* {
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans KR", sans-serif;
+}
+body {
+  background-color: #141414;
+}
+
 .hidden {
   display: none;
+}
+.profile_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+.profilebox {
+  margin: 20px;
+  text-align: center;
+}
+.profilebox .title {
+  font-size: 50px;
+}
+.userbox {
+  display: flex;
+  margin-top: 30px;
+}
+button {
+  border: 0px solid black;
+  background-color: transparent;
+  cursor: pointer;
+  color: aliceblue;
+}
+span {
+  color: whitesmoke;
+}
+.inputbox {
+  text-align: center;
+  padding: 20px;
+}
+.inputbox input {
+  border: none;
+  background-color: gray;
+  border-radius: 1px;
+  height: 30px;
+  width: 300px;
+  margin: 10px;
+  color: white;
+  padding-left: 10px;
+}
+.inputbox input::placeholder {
+  color: white;
+}
+.inputbox input:focus {
+  outline: none;
+}
+.inputbox .title {
+  font-size: 60px;
+  margin-bottom: 50px;
+}
+.inputbox .desc {
+  display: block;
+  font-size: 20px;
+  color: lightgray;
+  opacity: 0.8;
+}
+.inputbox form {
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  opacity: 0.8;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
 }

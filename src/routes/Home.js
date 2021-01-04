@@ -1,6 +1,11 @@
 import axios from 'axios';
 import React from 'react'
+import Movie from '../components/Movie'
+import BestMovie from '../components/BestMovie'
+import './Home.css'
+
 const CURRENT_USER_LS = 'currentUser'
+
 
 
 class Home extends React.Component {
@@ -34,7 +39,25 @@ class Home extends React.Component {
         return (
         <section className='container'>
             {isLoading? <h1>Loading...</h1> 
-            :<h2>Done</h2>
+            :<div className='movies'>
+            <div className='bestMovie_container'>
+              <BestMovie title={movies[0].title} image={movies[0].large_cover_image}></BestMovie>
+              <BestMovie title={movies[1].title} image={movies[1].large_cover_image}></BestMovie>
+              <BestMovie title={movies[2].title} image={movies[2].large_cover_image}></BestMovie>
+            </div>
+            <div className='movie_container'>
+              {movies.map(movie => 
+              <Movie 
+              key={movie.id} 
+              id={movie.id} 
+              title={movie.title} 
+              image={movie.medium_cover_image}
+              year={movie.year}
+              runtime={movie.runtime}
+              genres={movie.genres}
+              />)}
+            </div>
+            </div>
             }
         </section>
 

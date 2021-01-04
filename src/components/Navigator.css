@@ -1,0 +1,21 @@
+a:visited {
+  color: aliceblue;
+}
+.navbar {
+  display: flex;
+  position: sticky;
+  top: 0px;
+  justify-content: space-around;
+  align-items: center;
+  height: 50px;
+}
+.logo {
+  background-color: red;
+  height: 30px;
+  width: 70px;
+  text-align: center;
+}
+.user_info .name {
+  margin: 8px;
+  border-bottom: 1px solid white;
+}
