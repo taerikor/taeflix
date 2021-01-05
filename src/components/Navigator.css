@@ -8,6 +8,7 @@ a:visited {
   justify-content: space-around;
   align-items: center;
   height: 50px;
+  background-color: #141414;
 }
 .logo {
   background-color: red;

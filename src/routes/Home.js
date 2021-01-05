@@ -46,15 +46,18 @@ class Home extends React.Component {
               <BestMovie title={movies[2].title} image={movies[2].large_cover_image}></BestMovie>
             </div>
             <div className='movie_container'>
-              {movies.map(movie => 
+              {movies.map((movie,index) => 
               <Movie 
               key={movie.id} 
-              id={movie.id} 
+              id={index} 
               title={movie.title} 
               image={movie.medium_cover_image}
               year={movie.year}
               runtime={movie.runtime}
               genres={movie.genres}
+              summary={movie.summary}
+              largeImage={movie.large_cover_image}
+              api={this.state.movies}
               />)}
             </div>
             </div>

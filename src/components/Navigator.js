@@ -22,7 +22,6 @@ class Navigator extends React.Component{
               <div className='navbar'>
                 <div className='logo'>logo</div>
                 <Link to='/browse'>Home</Link>
-                <Link to='/browse/genre'>Genre</Link>
                 <Link to='/browse/mylist'>My List</Link>
                 <div className='user_info'>
                 <span className='name'>{name}</span>
