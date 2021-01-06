@@ -1,8 +1,9 @@
 import React from 'react'
 import axios from 'axios';
 import Movie from '../components/Movie'
+import './MyList.css'
 
-const USERNAME = localStorage.getItem('currentUser')
+
 
 class MyList extends React.Component{
     constructor(props){
@@ -25,19 +26,27 @@ class MyList extends React.Component{
        };
 
      componentDidMount(){
+      const { location, history} = this.props;
+      const CURRENT_USER_LS = 'currentUser'
+      if(location.state === undefined && !(localStorage.getItem(CURRENT_USER_LS))){
+          history.push('/');
+      }
          this.getMovies();
      }
 
     render(){
+      const USERNAME = localStorage.getItem('currentUser')
         const {isLoading,movies} = this.state;
-        const test = localStorage.getItem(USERNAME)? JSON.parse(localStorage.getItem(USERNAME)).map(x => x.id) : null;
-        const test2 = test !== null ? test.map(x => movies[x]) : null;
-        if(test !== null) {
+        const listNumber = localStorage.getItem(USERNAME)? JSON.parse(localStorage.getItem(USERNAME)).map(x => x.id) : null;
+        const movieList = listNumber !== null ? listNumber.map(x => movies[x]) : null;
+        if(listNumber !== null) {
             return (
                 <>
-                {isLoading ? <h1>loading..</h1> :
-                <div>
-                    {test2.map((movie,index) => 
+                {isLoading ? <h1 className='loading'>Loading..</h1> :
+                <>
+                <div className='mylist_title'>MY LIST</div>
+                <div className='mylistbox'>
+                    {movieList.map((movie,index) => 
                   <Movie 
                   key={index} 
                   id={index} 
@@ -50,12 +59,13 @@ class MyList extends React.Component{
                   largeImage={movie.large_cover_image}
                   />)}
                 </div>
+                </>
                 }
                 </>        
                 )
             
         }else {
-            return <h1> My list is Empty </h1>
+            return <h1 className='loading'>EMPTY </h1>
         }
     }
 }

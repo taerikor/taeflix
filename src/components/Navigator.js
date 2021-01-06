@@ -20,7 +20,7 @@ class Navigator extends React.Component{
         const name = localStorage.getItem(CURRENT_USER_LS)
           return( 
               <div className='navbar'>
-                <div className='logo'>logo</div>
+                <div className='logo'>TAEFLIX</div>
                 <Link to='/browse'>Home</Link>
                 <Link to='/browse/mylist'>My List</Link>
                 <div className='user_info'>

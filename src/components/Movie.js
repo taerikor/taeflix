@@ -6,21 +6,15 @@ import './Movie.css'
 const Movie = ({image,title,year,runtime,genres,largeImage,summary,id,api}) => {
     const onMouseOut = (e) => {
         const info = e.target.nextSibling
-        const showing = () => {
             if(info.id === ''){
                 info.id = 'hidden';
             }
-        }
-        setTimeout(showing,500)
     }
     const onMouseOver = (e) => {
         const info = e.target.nextSibling
-        const showing = () => {
             if(info.id === 'hidden'){
                 info.id = '';
             }
-        }
-        setTimeout(showing,500)
     // //    .remove('hidden')
     }
     return(
@@ -43,7 +37,7 @@ const Movie = ({image,title,year,runtime,genres,largeImage,summary,id,api}) => {
                 <span className='title'>{title}</span>
                 <div className='infobox'>
                 <span className='year'>{year}</span>
-                <span>{`${runtime}m`}</span>
+                <span className='runtime'>{`${runtime}m`}</span>
                 </div>
                 <ul>
                     {genres.map((genre,index) => (<li key={index}>{genre}</li>))}

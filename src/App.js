@@ -13,7 +13,7 @@ function App() {
       <Route path='/browse' component={Navigator}/>
       <Route path='/browse/mylist' component={MyList} />
       <Route path='/browse/detail'  component={Detail} />
-      <Route path='/browse'  component={Home} />
+      <Route path='/browse' exact={true}  component={Home} />
     </HashRouter>
 
 

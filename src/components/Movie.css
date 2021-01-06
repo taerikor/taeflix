@@ -3,30 +3,40 @@
 }
 .movieBox {
   margin: 30px;
+}
+
+.movieBox > a {
   display: flex;
+  padding: 0;
+  margin: 0;
+  border-radius: 5px;
 }
 .movieBox img {
-  height: 200px;
-  width: 120px;
+  height: 220px;
+  width: 180px;
   border-radius: 5px;
 }
+
 .movie_info {
-  height: 200px;
-  width: 300px;
   background-color: #333;
+  height: 220px;
+  width: 150px;
   border-radius: 5px;
-}
-.movie_info span {
-  color: lightgray;
-  font-size: 15px;
 }
 .movie_info .title {
-  color: white;
   font-size: 20px;
-  padding: 10px;
+  margin: 10px;
 }
-.movie_info .year {
-  color: white;
+
+.infobox span {
   font-size: 12px;
+  text-align: ;
+  margin-right: 20px;
   margin-left: 10px;
+  color: darkgray;
+}
+ul {
+  font-size: 10px;
+  list-style: none;
+  margin: 10px;
 }

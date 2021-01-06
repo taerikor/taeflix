@@ -18,5 +18,6 @@ a:visited {
 }
 .user_info .name {
   margin: 8px;
-  border-bottom: 1px solid white;
+  padding: 12px;
+  border-bottom: 2px solid white;
 }

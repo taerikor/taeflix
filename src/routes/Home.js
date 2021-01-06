@@ -1,6 +1,6 @@
 import axios from 'axios';
-import React from 'react'
 import Movie from '../components/Movie'
+import React from 'react'
 import BestMovie from '../components/BestMovie'
 import './Home.css'
 
@@ -38,13 +38,21 @@ class Home extends React.Component {
         const { isLoading, movies } = this.state;
         return (
         <section className='container'>
-            {isLoading? <h1>Loading...</h1> 
+            {isLoading? <h1 className='loading'>Loading...</h1> 
             :<div className='movies'>
             <div className='bestMovie_container'>
+              <div className='movie1'>
               <BestMovie title={movies[0].title} image={movies[0].large_cover_image}></BestMovie>
-              <BestMovie title={movies[1].title} image={movies[1].large_cover_image}></BestMovie>
+              </div>
+              <div className='sidebox'>
+                <div className='movie2'>
+              <BestMovie title={movies[1].title} image={movies[1].large_cover_image}></BestMovie>    
+                </div>
+                <div className='movie3'>
               <BestMovie title={movies[2].title} image={movies[2].large_cover_image}></BestMovie>
+                </div>
             </div>
+              </div>
             <div className='movie_container'>
               {movies.map((movie,index) => 
               <Movie 
@@ -57,7 +65,6 @@ class Home extends React.Component {
               genres={movie.genres}
               summary={movie.summary}
               largeImage={movie.large_cover_image}
-              api={this.state.movies}
               />)}
             </div>
             </div>

@@ -1,3 +1,59 @@
-h1 {
-  position: absolute;
+.detailbox {
+  display: flex;
+}
+.detailbox > div {
+  flex: 1;
+}
+.detailbox > .imgbox {
+  flex: 0.5;
+  align-self: center;
+}
+.detailbox img {
+  height: 100%;
+  width: 100%;
+}
+.detail_info {
+  margin-right: 20px;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.detail_info .title {
+  font-size: 40px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.detail_infobox {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+.detail_infobox button {
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 5px;
+}
+.detail_infobox span {
+  color: darkgray;
+  font-size: 18px;
+}
+.detailbox .genre {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+.detailbox .genre li {
+  margin: 10px;
+  font-size: 14px;
+}
+.summary {
+  margin-top: 30px;
+}
+.btnbox {
+  text-align: right;
+}
+.btnbox button {
+  font-size: 20px;
 }
