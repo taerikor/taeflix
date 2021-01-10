@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Movie from '../components/Movie'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import BestMovie from '../components/BestMovie'
 import './Home.css'
 
@@ -8,16 +8,11 @@ const CURRENT_USER_LS = 'currentUser'
 
 
 
-class Home extends React.Component {
-   constructor(props){
-       super(props)
-       this.state={
-           movies:[],
-            isLoading:true
-       }
-       
-    }
-    getMovies = async () => {
+const Home = ({history,location}) => {
+    const [movies,setMovies] = useState([])
+    const [isLoading,setLoading] = useState(true) 
+
+   const getMovies = async () => {
         const {
           data: {
             data: { movies }
@@ -25,17 +20,16 @@ class Home extends React.Component {
         } = await axios.get(
           "https://yts-proxy.now.sh/list_movies.json?sort_by=rating"
         );
-        this.setState({movies,isLoading:false})
+        setMovies(movies)
+        setLoading(false)
       };
-    componentDidMount(){
-        const { location, history} = this.props;
+      useEffect(()=> {
         if(location.state === undefined && !(localStorage.getItem(CURRENT_USER_LS))){
             history.push('/');
         }
-        this.getMovies();
-    }
-    render(){
-        const { isLoading, movies } = this.state;
+        getMovies();
+      },[])
+    
         return (
         <section className='container'>
             {isLoading? <h1 className='loading'>Loading...</h1> 
@@ -72,7 +66,6 @@ class Home extends React.Component {
         </section>
 
         )
-    }
 }
 
 export default Home; 

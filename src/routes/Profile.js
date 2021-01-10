@@ -1,97 +1,90 @@
-import React from 'react'
-import { User } from '../components/User';
+import userEvent from '@testing-library/user-event';
+import React, { useEffect, useRef, useState } from 'react'
+import  User  from '../components/User';
 import './Profile.css'
 
 const USERS_LS = 'users'
 const CLASS_HIDDEN = 'hidden'
 const CURRENT_USER_LS = 'currentUser'
 
-class Profile extends React.Component {
-    state={
-        name:'',
-        items:localStorage.getItem(USERS_LS)?JSON.parse(localStorage.getItem(USERS_LS)):[],
-        inputBox:React.createRef(),
-        UserBox:React.createRef()
-    }
-    componentDidMount() {
-        if(this.state.items.length > 0){
-        const inputBox = this.state.inputBox.current;
-        inputBox.classList.add(CLASS_HIDDEN)
-        }
-        if(this.state.items.length === 0){
-            const UserBox = this.state.UserBox.current
-            UserBox.classList.add(CLASS_HIDDEN)
-        }
-        if(localStorage.getItem(CURRENT_USER_LS)){
-            this.props.history.push('/browse')
-        }
-      }
-      componentDidUpdate() {
-        if(this.state.items.length === 0){
-            const inputBox = this.state.inputBox.current;
-            const UserBox = this.state.UserBox.current
-            inputBox.classList.remove(CLASS_HIDDEN)
-            UserBox.classList.add(CLASS_HIDDEN)
-            }
-      }
-    render(){
+const Profile = ({history}) => {
+
+    const [name,setName] = useState('')
+    const [items,setItems] = useState(localStorage.getItem(USERS_LS)?JSON.parse(localStorage.getItem(USERS_LS)):[])
+    const inputBox = useRef()
+    const UserBox = useRef()
+
+    useEffect(()=>{
+          if(items.length > 0){
+          inputBox.classList.add(CLASS_HIDDEN)
+          }
+          if(items.length === 0){
+              UserBox.classList.add(CLASS_HIDDEN)
+          }
+          if(localStorage.getItem(CURRENT_USER_LS)){
+                history.push('/browse')
+          }
+      },[])
+      userEvent(()=>{
+          if(items.length === 0){
+              inputBox.classList.remove(CLASS_HIDDEN)
+              UserBox.classList.add(CLASS_HIDDEN)
+              }
+      })
+
         const onSubmit = e => {
             e.preventDefault();
-            if (this.state.name.length === 0){
+            if (name.length === 0){
                 return;
             }
             const newItem ={
-                name:this.state.name,
+                name:name,
                 id: Date.now()
             };
-            if (this.state.items !== []){
-                localStorage.setItem(USERS_LS,JSON.stringify(this.state.items.concat(newItem)))
+            if (items !== []){
+                localStorage.setItem(USERS_LS,JSON.stringify(items.concat(newItem)))
             }
-            this.setState(state => ({
-                items: state.items.concat(newItem),
-                name:''
-            }));
-            this.props.history.push({
+            setItems(items.concat(newItem))
+            setName('')
+
+            history.push({
                 pathname:'/browse',
                 state:{name:newItem.name,id:newItem.id}
             })
          }
         const onChange = (e) =>{
-            this.setState(
-                {name:e.target.value})
-                
+            setName(e.target.value)   
             }
             const onBtnDelete = (e) => {
-                const cleanToDos = this.state.items.filter(function (toDo) {
+                const cleanToDos = items.filter(function (toDo) {
                     return toDo.id !== parseInt(e.target.parentNode.id);
                 });
                 localStorage.setItem(USERS_LS,JSON.stringify(cleanToDos))
-                this.setState(state => ({
-                    items: cleanToDos
-                }));
+                setItems(cleanToDos)
             }
+
             const onBtnBack = (e)=>{
-                const inputBox = this.state.inputBox.current;
                 inputBox.classList.remove(CLASS_HIDDEN)
                 e.target.classList.add(CLASS_HIDDEN)
             }
+
         return(
             <section className='profile_container'>
-            <div className='inputbox' ref={this.state.inputBox}>
+            <div className='inputbox' ref={inputBox}>
             <span className='title'>프로필 추가</span>
             <span className='desc'>다른 사용자를 등록하시려면 프로필을 추가하세요.</span>
             <form onSubmit={onSubmit}>
                 <input type='text' placeholder='이름'
-                value={this.state.name}
+                value={name}
                 onChange={onChange}/>
                 <button>확인</button>
             </form>
             </div>
-            <div className='profilebox' ref={this.state.UserBox}>
+            <div className='profilebox' ref={UserBox}>
                 <span className='title'>프로필 관리</span>
                     <button onClick={onBtnBack}>Back</button>
                 <div className='userbox'>
-            {this.state.items.map(item => (
+            {items.map(item => (
                 <User 
                 key={item.id}
                 id={item.id} 
@@ -101,7 +94,6 @@ class Profile extends React.Component {
             </div>
     </section>
         )
-    }
 }
 
 export default Profile

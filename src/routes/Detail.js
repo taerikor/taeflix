@@ -1,33 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Detail.css'
 
 
-class Detail extends React.Component {
-    constructor(props){
-        super(props)
-        const USERNAME = localStorage.getItem('currentUser')
-        this.state={
-            id:localStorage.getItem(USERNAME)?JSON.parse(localStorage.getItem(USERNAME)):[]
-        }
-    }
-    
-    componentDidMount(){
-        const {location,history}=this.props
+const Detail = ({location,history}) => {
+   
+    const USERNAME = localStorage.getItem('currentUser')
+    console.log(USERNAME)
+    const [id,setId] = useState(localStorage.getItem(USERNAME)?JSON.parse(localStorage.getItem(USERNAME)):[])
+
+
+    useEffect(()=>{
         if(location.state === undefined){
             history.push('/browse')
         }
-    }
-    componentDidUpdate(){
+
+    },[])
+
+    useEffect(()=> {
         const USERNAME = localStorage.getItem('currentUser')
-        localStorage.setItem(USERNAME,JSON.stringify(this.state.id))
-    }
-    render(){
-        const {location,history} = this.props
+        localStorage.setItem(USERNAME,JSON.stringify(id))
+    })
+
+
         const onClick = () => {
             const newId = {
                 id:location.state.id
             }
-            this.setState(state => ({id:state.id.concat(newId)}))
+            setId(id.concat(newId))
         }
         const onExitBtnClick = () => {
             history.push('/browse')
@@ -56,7 +55,6 @@ class Detail extends React.Component {
         }else {
             return null;
         }
-    }
 }
 
 export default Detail;

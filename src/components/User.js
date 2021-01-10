@@ -2,23 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './User.css'
 
-export class User extends React.Component {
-    render(){
+const User = ({id,name,onBtnClick}) => {
     return (
-        <div className='user' id={this.props.id}>
+        <div className='user' id={id}>
             <Link to={{
                 pathname:'/browse',
                 state:{
-                    name:this.props.name,
-                    id:this.props.id
+                    name:name,
+                    id:id
                 }
             }}>
             <div>
-            <span>{this.props.name}</span>
+            <span>{name}</span>
             </div>
             </Link> 
-            <button onClick={this.props.onBtnClick}>ｘ</button>
+            <button onClick={onBtnClick}>ｘ</button>
         </div>
     )
-    }
 }
+
+export default User;

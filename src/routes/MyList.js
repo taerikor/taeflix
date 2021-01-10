@@ -1,20 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Movie from '../components/Movie'
 import './MyList.css'
 
 
 
-class MyList extends React.Component{
-    constructor(props){
-        super(props)
-        this.state={
-            movies:[],
-             isLoading:true
-        }
-        
-     }
-     getMovies = async () => {
+const MyList =({history,location})=>{
+
+     const [movies,setMovies] = useState([])
+     const [isLoading,setLoading] = useState(true) 
+     const getMovies = async () => {
          const {
            data: {
              data: { movies }
@@ -22,21 +17,19 @@ class MyList extends React.Component{
          } = await axios.get(
            "https://yts-proxy.now.sh/list_movies.json?sort_by=rating"
          );
-         this.setState({movies,isLoading:false})
+         setMovies(movies)
+         setLoading(false)
        };
 
-     componentDidMount(){
-      const { location, history} = this.props;
-      const CURRENT_USER_LS = 'currentUser'
+    useEffect(()=> {
+       const CURRENT_USER_LS = 'currentUser'
       if(location.state === undefined && !(localStorage.getItem(CURRENT_USER_LS))){
           history.push('/');
       }
-         this.getMovies();
-     }
+      getMovies();
+    },[])
 
-    render(){
       const USERNAME = localStorage.getItem('currentUser')
-        const {isLoading,movies} = this.state;
         const listNumber = localStorage.getItem(USERNAME)? JSON.parse(localStorage.getItem(USERNAME)).map(x => x.id) : null;
         const movieList = listNumber !== null ? listNumber.map(x => movies[x]) : null;
         if(listNumber !== null) {
@@ -67,7 +60,6 @@ class MyList extends React.Component{
         }else {
             return <h1 className='loading'>EMPTY </h1>
         }
-    }
 }
 
 export default MyList;
