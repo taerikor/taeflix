@@ -1,4 +1,3 @@
-import userEvent from '@testing-library/user-event';
 import React, { useEffect, useRef, useState } from 'react'
 import  User  from '../components/User';
 import './Profile.css'
@@ -15,20 +14,21 @@ const Profile = ({history}) => {
     const UserBox = useRef()
 
     useEffect(()=>{
+        console.log(inputBox, UserBox)
           if(items.length > 0){
-          inputBox.classList.add(CLASS_HIDDEN)
+          inputBox.current.classList.add(CLASS_HIDDEN)
           }
           if(items.length === 0){
-              UserBox.classList.add(CLASS_HIDDEN)
+              UserBox.current.classList.add(CLASS_HIDDEN)
           }
           if(localStorage.getItem(CURRENT_USER_LS)){
                 history.push('/browse')
           }
       },[])
-      userEvent(()=>{
+      useEffect(()=>{
           if(items.length === 0){
-              inputBox.classList.remove(CLASS_HIDDEN)
-              UserBox.classList.add(CLASS_HIDDEN)
+              inputBox.current.classList.remove(CLASS_HIDDEN)
+              UserBox.current.classList.add(CLASS_HIDDEN)
               }
       })
 
@@ -64,7 +64,7 @@ const Profile = ({history}) => {
             }
 
             const onBtnBack = (e)=>{
-                inputBox.classList.remove(CLASS_HIDDEN)
+                inputBox.current.classList.remove(CLASS_HIDDEN)
                 e.target.classList.add(CLASS_HIDDEN)
             }
 

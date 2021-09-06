@@ -1,3 +1,13 @@
-# taeflix-plus
+# Taeflix
 
-Build Netflix clone using react-redux for practice
+used React
+
+To use this application,
+
+```
+//root directory
+npm install
+npm run start
+```
+
+thank you for visiting!
