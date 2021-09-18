@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import  User  from '../components/User';
-import './Profile.css'
+import './Auth.css'
 
 const USERS_LS = 'users'
 const CLASS_HIDDEN = 'hidden'
