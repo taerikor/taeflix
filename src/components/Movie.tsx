@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Movie.css'
 
@@ -14,21 +14,20 @@ interface MovieProps {
 }
 
 const Movie = ({title,year,runtime,genres,largeImage,summary,id,image}:MovieProps) => {
-    // const onMouseOut = (e) => {
-    //     const info = e.target.nextSibling
-    //         if(info.id === ''){
-    //             info.id = 'hidden';
-    //         }
-    // }
-    // const onMouseOver = (e) => {
-    //     const info = e.target.nextSibling
-    //         if(info.id === 'hidden'){
-    //             info.id = '';
-    //         }
-    // // //    .remove('hidden')
-    // }
+    const [isMouseOver,setIsMouseOver] = useState(false)
+    const onMouseOut = (e:React.MouseEvent<HTMLDivElement>) => {
+        console.log('out')
+        setIsMouseOver(false)
+    }
+    const onMouseOver = (e:React.MouseEvent<HTMLDivElement>) => {
+        setIsMouseOver(true)
+        // const info = e.target.nextSibling
+        //     if(info.id === 'hidden'){
+        //         info.id = '';
+        //     }
+    }
     return (
-        <div className='movieBox'>
+        <div className='movieBox' onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
             <Link to={{
                 pathname:'/detail',
                 state:{
@@ -41,17 +40,18 @@ const Movie = ({title,year,runtime,genres,largeImage,summary,id,image}:MovieProp
                     id,
                 }
             }}>
-            <img src={image} alt={title} />
-                <div className='movie_info' id='hidden'>
-                    <span className='title'>{title}</span>
-                    <div className='infobox'>
-                        <span className='year'>{year}</span>
-                        <span className='runtime'>{`${runtime}m`}</span>
-                    </div>
-                    <ul>
-                        {genres.map((genre,index) => (<li key={index}>{genre}</li>))}
-                    </ul>
-                </div>
+            {isMouseOver? (
+            <div className='movie_info'>
+                <span className='title'>{title}</span>
+            {/* <div className='infobox'>
+                <span className='year'>{year}</span>
+                <span className='runtime'>{`${runtime}m`}</span>
+            </div>
+                <ul>
+                    {genres.map((genre,index) => (<li key={index}>{genre}</li>))}
+                </ul> */}
+            </div>  
+            ):<img src={image} alt={title} />}
             </Link>
         </div>
     )

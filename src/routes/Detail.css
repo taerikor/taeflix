@@ -1,5 +1,18 @@
-.detailbox {
+.detail_overlay {
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detailbox {
+  position: relative;
+  display: flex;
+  width: 70%;
+  background-color: #141414;
 }
 .detailbox > div {
   flex: 1;

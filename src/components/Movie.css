@@ -2,25 +2,30 @@
   display: none;
 }
 .movieBox {
-  margin: 30px;
+  margin: 10px;
+  width: 15%;
+  height: auto;
 }
 
 .movieBox > a {
-  display: flex;
+  width: 100%;
+  height: 100%;
   padding: 0;
   margin: 0;
-  border-radius: 5px;
 }
 .movieBox img {
-  height: 220px;
-  width: 180px;
+  height: 100%;
+  width: 100%;
   border-radius: 5px;
 }
 
 .movie_info {
   background-color: #333;
-  height: 220px;
-  width: 150px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 5px;
 }
 .movie_info .title {
@@ -29,9 +34,9 @@
 }
 
 .infobox span {
-  font-size: 12px;
-  margin-right: 20px;
-  margin-left: 10px;
+  font-size: 0.5em;
+  /* margin-right: 20px;
+  margin-left: 10px; */
   color: darkgray;
 }
 ul {

@@ -32,11 +32,11 @@ function App() {
     <Switch>
       {user ? (
         <>
-          <Route exact path='/' >
-            <Home />
-          </Route>
-          <Route exact path='/detail' >
+          <Route path='/detail' >
             <Detail />
+          </Route>
+          <Route  path='/' >
+            <Home />
           </Route>
           <Route exact path='/mylist' >
             <MyList />
