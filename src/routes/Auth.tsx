@@ -1,41 +1,48 @@
 
 import React, { useEffect, useRef, useState } from 'react'
+import { useHistory } from 'react-router';
 import  User  from '../components/User';
 import './Auth.css'
 
 const USERS_LS = 'users'
 const CLASS_HIDDEN = 'hidden'
 const CURRENT_USER_LS = 'currentUser'
+interface AuthProps {
+    USER_LS:string
+    loginUser: () => void
+}
 
-const Auth = () => {
+const Auth = ({USER_LS,loginUser}:AuthProps) => {
 
     const [name,setName] = useState('')
     // const [items,setItems] = useState(localStorage.getItem(USERS_LS)?JSON.parse(localStorage.getItem(USERS_LS)):[])
     const inputBox = useRef()
     const UserBox = useRef()
 
-        const onSubmit = () => {
-            // e.preventDefault();
-            // if (name.length === 0){
-            //     return;
-            // }
+
+        const onSubmit = (e:React.FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
+            if (name.length === 0){
+                return;
+            }
             // const newItem ={
-            //     name:name,
+            //     name,
             //     id: Date.now()
             // };
             // if (items !== []){
             //     localStorage.setItem(USERS_LS,JSON.stringify(items.concat(newItem)))
             // }
             // setItems(items.concat(newItem))
-            // setName('')
-
+            localStorage.setItem(USER_LS, name)
+            loginUser()
+            setName('')
             // history.push({
             //     pathname:'/browse',
             //     state:{name:newItem.name,id:newItem.id}
             // })
          }
-        const onChange = () =>{
-            // setName(e.target.value)   
+        const onChange = (e:React.ChangeEvent<HTMLInputElement>) =>{
+            setName(e.target.value)   
             }
 
         const onBtnDelete = () => {
@@ -61,18 +68,21 @@ const Auth = () => {
                 <button>확인</button>
             </form>
             </div>
-            <div className='profilebox'>
+            
+            {
+            //유저목록 
+            /* <div className='profilebox'>
                 <span className='title'>프로필 관리</span>
-                    <button onClick={onBtnBack}>Back</button>
-                <div className='userbox'>
+                <a onClick={onBtnBack}>Back</a>
+            <div className='userbox'>
+                </div>
+            </div> */}
             {/* {items.map(item => (
                 <User 
                 key={item.id}
                 id={item.id} 
                 onBtnClick={onBtnDelete} 
                 name={item.name}></User>))} */}
-                </div>
-            </div>
     </section>
         )
 }
