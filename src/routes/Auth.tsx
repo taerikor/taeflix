@@ -1,12 +1,8 @@
 
 import React, { useEffect, useRef, useState } from 'react'
-import { useHistory } from 'react-router';
 import  User  from '../components/User';
 import './Auth.css'
 
-const USERS_LS = 'users'
-const CLASS_HIDDEN = 'hidden'
-const CURRENT_USER_LS = 'currentUser'
 interface AuthProps {
     USER_LS:string
     loginUser: () => void
@@ -16,8 +12,6 @@ const Auth = ({USER_LS,loginUser}:AuthProps) => {
 
     const [name,setName] = useState('')
     // const [items,setItems] = useState(localStorage.getItem(USERS_LS)?JSON.parse(localStorage.getItem(USERS_LS)):[])
-    const inputBox = useRef()
-    const UserBox = useRef()
 
 
         const onSubmit = (e:React.FormEvent<HTMLFormElement>) => {
@@ -36,10 +30,6 @@ const Auth = ({USER_LS,loginUser}:AuthProps) => {
             localStorage.setItem(USER_LS, name)
             loginUser()
             setName('')
-            // history.push({
-            //     pathname:'/browse',
-            //     state:{name:newItem.name,id:newItem.id}
-            // })
          }
         const onChange = (e:React.ChangeEvent<HTMLInputElement>) =>{
             setName(e.target.value)   

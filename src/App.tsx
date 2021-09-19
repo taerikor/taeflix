@@ -5,6 +5,7 @@ import Navigator from './components/Navigator';
 import MyList from './routes/MyList';
 import Detail from './routes/Detail';
 import Auth from './routes/Auth';
+import PageNotFound from './routes/PageNotFound';
 
 
 
@@ -32,20 +33,22 @@ function App() {
     <Switch>
       {user ? (
         <>
-          <Route path='/detail' >
-            <Detail />
-          </Route>
-          <Route  path='/' >
+          <Route exact path='/' >
             <Home />
           </Route>
-          <Route exact path='/mylist' >
+          <Route  path='/detail' >
+            <Detail />
+          </Route>
+          <Route  path='/mylist' >
             <MyList />
           </Route>
         </>
       ):(
+        <>
         <Route exact path='/' >
           <Auth USER_LS={USER_LS} loginUser={loginUser}/>
         </Route>
+        </>
       )}
     </Switch>
   </HashRouter>
